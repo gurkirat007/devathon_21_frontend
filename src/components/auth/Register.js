@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
+
 class Register extends Component {
   constructor() {
     super();
@@ -8,25 +9,57 @@ class Register extends Component {
       email: "",
       password: "",
       password2: "",
-      errors: {}
+      errors: {},
+      redirect: null,
     };
   }
-onChange = e => {
+  onChange = (e) => {
     this.setState({ [e.target.id]: e.target.value });
   };
-onSubmit = e => {
+  onSubmit = (e) => {
     e.preventDefault();
-const newUser = {
-      name: this.state.name,
-      email: this.state.email,
-      password: this.state.password,
-      password2: this.state.password2
-    };
-console.log(newUser);
+    if (
+      this.state.name === "" ||
+      this.state.email === "" ||
+      this.state.password === ""
+    ) {
+      console.log("enter all details");
+    } else {
+      if (this.state.password === this.state.password2) {
+        const newUser = {
+          name: this.state.name,
+          email: this.state.email,
+          password: this.state.password,
+        };
+
+        fetch("http://localhost:8000/register", {
+          body: newUser,
+          method: "POST",
+        })
+          .then((response) => {
+            return response.json();
+          })
+          .then((data) => {
+            console.log(data);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+
+        // console.log(newUser);
+
+        this.setState({ redirect: "/login" });
+      } else {
+        console.log("dono password same rakh be");
+      }
+    }
   };
-render() {
+  render() {
     const { errors } = this.state;
-return (
+    if (this.state.redirect) {
+      return <Redirect to={this.state.redirect} />;
+    }
+    return (
       <div className="container">
         <div className="row">
           <div className="col s8 offset-s2">
@@ -89,7 +122,7 @@ return (
                     width: "150px",
                     borderRadius: "3px",
                     letterSpacing: "1.5px",
-                    marginTop: "1rem"
+                    marginTop: "1rem",
                   }}
                   type="submit"
                   className="btn btn-large waves-effect waves-light hoverable blue accent-3"

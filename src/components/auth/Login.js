@@ -9,20 +9,33 @@ class Login extends Component {
       errors: {}
     };
   }
-onChange = e => {
+  onChange = e => {
     this.setState({ [e.target.id]: e.target.value });
   };
-onSubmit = e => {
+  onSubmit = e => {
     e.preventDefault();
-const userData = {
+    const userData = {
       email: this.state.email,
       password: this.state.password
     };
-console.log(userData);
+    fetch("http://localhost:8000/login", {
+      body: userData,
+      method: "POST"
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    console.log(userData);
   };
-render() {
+  render() {
     const { errors } = this.state;
-return (
+    return (
       <div className="container">
         <div style={{ marginTop: "4rem" }} className="row">
           <div className="col s8 offset-s2">
@@ -65,13 +78,15 @@ return (
                     width: "150px",
                     borderRadius: "3px",
                     letterSpacing: "1.5px",
-                    marginTop: "1rem"
+                    marginTop: "1rem",
+                    marginRight: "1rem"
                   }}
                   type="submit"
                   className="btn btn-large waves-effect waves-light hoverable blue accent-3"
                 >
                   Login
                 </button>
+                <Link to="/forgot"> Forgot Password? </Link>
               </div>
             </form>
           </div>
