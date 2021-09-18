@@ -13,46 +13,51 @@ class Register extends Component {
       redirect: null,
     };
   }
-  onChange = e => {
+  onChange = (e) => {
     this.setState({ [e.target.id]: e.target.value });
   };
-  onSubmit = e => {
+  onSubmit = (e) => {
     e.preventDefault();
-    if(this.state.password === this.state.password2) {
-      const newUser = {
-        name: this.state.name,
-        email: this.state.email,
-        password: this.state.password,
-      };
+    if (
+      this.state.name === "" ||
+      this.state.email === "" ||
+      this.state.password === ""
+    ) {
+      console.log("enter all details");
+    } else {
+      if (this.state.password === this.state.password2) {
+        const newUser = {
+          name: this.state.name,
+          email: this.state.email,
+          password: this.state.password,
+        };
 
-
-      fetch("http://localhost:8000/register", {
-        body: newUser,
-        method: "POST"
-      })
-        .then((response) => {
-          return response.json();
+        fetch("http://localhost:8000/register", {
+          body: newUser,
+          method: "POST",
         })
-        .then((data) => {
-          console.log(data);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+          .then((response) => {
+            return response.json();
+          })
+          .then((data) => {
+            console.log(data);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
 
-      console.log(newUser);
-      
-      this.setState({redirect: "/login"});
-      
-    }
-    else{
-      console.log("dono password same rakh be");
+        // console.log(newUser);
+
+        this.setState({ redirect: "/login" });
+      } else {
+        console.log("dono password same rakh be");
+      }
     }
   };
   render() {
     const { errors } = this.state;
-    if(this.state.redirect){
-      return <Redirect to={this.state.redirect}/>
+    if (this.state.redirect) {
+      return <Redirect to={this.state.redirect} />;
     }
     return (
       <div className="container">
@@ -117,7 +122,7 @@ class Register extends Component {
                     width: "150px",
                     borderRadius: "3px",
                     letterSpacing: "1.5px",
-                    marginTop: "1rem"
+                    marginTop: "1rem",
                   }}
                   type="submit"
                   className="btn btn-large waves-effect waves-light hoverable blue accent-3"
