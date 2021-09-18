@@ -66,7 +66,6 @@ body {
   outline: none;
   border: none;
 }
-@import url("../../node_modules/bootstrap/dist/css/bootstrap.css");
 
 *,
 *:before,
@@ -84,15 +83,6 @@ h4,
 h5,
 h6 {
   margin: 0;
-}
-
-.navbar {
-  margin-bottom: 0;
-  border-radius: 0;
-  background-image: url("../images/wisdompetlogo.svg");
-  background-repeat: no-repeat;
-  background-size: 40px;
-  background-position: 10px;
 }
 
 @media only screen and (max-width: 768px) {
@@ -262,19 +252,6 @@ h6 {
 
 .item-list .apt-date {
   font-style: italic;
-}
-
-#page-info {
-  background: transparent;
-  color: white;
-  display: flex;
-  flex-flow: row wrap;
-  flex-direction: column;
-  justify-content: center;
-  height: 100vh;
-  -webkit-app-region: drag;
-  -webkit-user-select: none;
-  cursor: pointer;
 }
 
 #page-info a:link {
