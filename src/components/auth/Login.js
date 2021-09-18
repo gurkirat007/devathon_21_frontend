@@ -6,21 +6,21 @@ class Login extends Component {
     this.state = {
       email: "",
       password: "",
-      errors: {}
+      errors: {},
     };
   }
-  onChange = e => {
+  onChange = (e) => {
     this.setState({ [e.target.id]: e.target.value });
   };
-  onSubmit = e => {
+  onSubmit = (e) => {
     e.preventDefault();
     const userData = {
       email: this.state.email,
-      password: this.state.password
+      password: this.state.password,
     };
     fetch("http://localhost:8000/login", {
       body: userData,
-      method: "POST"
+      method: "POST",
     })
       .then((response) => {
         return response.json();
@@ -80,7 +80,7 @@ class Login extends Component {
                     borderRadius: "3px",
                     letterSpacing: "1.5px",
                     marginTop: "1rem",
-                    marginRight: "1rem"
+                    marginRight: "1rem",
                   }}
                   type="submit"
                   className="btn btn-large waves-effect waves-light hoverable blue accent-3"

@@ -31,10 +31,13 @@ class Register extends Component {
           email: this.state.email,
           password: this.state.password,
         };
-
+        console.log(newUser);
         fetch("http://localhost:8000/register", {
           body: newUser,
           method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
         })
           .then((response) => {
             return response.json();
@@ -104,7 +107,7 @@ class Register extends Component {
                   id="password"
                   type="password"
                 />
-                <label htmlFor="password">Password</label>
+                <label name="password">Password</label>
               </div>
               <div className="input-field col s12">
                 <input
