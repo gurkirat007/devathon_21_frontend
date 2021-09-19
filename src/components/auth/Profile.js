@@ -77,8 +77,8 @@ class Profile extends Component {
                                       <label>EDUCATION</label>
                                   </div>
                                   <div className="col-md-6">
-                                      <p>B.tech , M.Tech </p>
-                                      
+                                      <p>B.tech , M.Tech
+                                      </p>
                                   </div>
                             </div>
 
