@@ -25,16 +25,22 @@ class Register extends Component {
     ) {
       console.log("enter all details");
     } else {
-      if (this.state.password === this.state.password2) {
+      if (
+        this.state.password === this.state.password2 &&
+        this.state.email.includes("@student.nitw.ac.in")
+      ) {
         const newUser = {
           name: this.state.name,
           email: this.state.email,
           password: this.state.password,
         };
-
+        console.log(newUser);
         fetch("http://localhost:8000/register", {
           body: newUser,
           method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
         })
           .then((response) => {
             return response.json();
@@ -50,7 +56,9 @@ class Register extends Component {
 
         this.setState({ redirect: "/login" });
       } else {
-        console.log("dono password same rakh be");
+        console.log(
+          "either you aren't student of nitw or your passwords don't match"
+        );
       }
     }
   };
