@@ -25,7 +25,10 @@ class Register extends Component {
     ) {
       console.log("enter all details");
     } else {
-      if (this.state.password === this.state.password2) {
+      if (
+        this.state.password === this.state.password2 &&
+        this.state.email.includes("@student.nitw.ac.in")
+      ) {
         const newUser = {
           name: this.state.name,
           email: this.state.email,
@@ -53,7 +56,9 @@ class Register extends Component {
 
         this.setState({ redirect: "/login" });
       } else {
-        console.log("dono password same rakh be");
+        console.log(
+          "either you aren't student of nitw or your passwords don't match"
+        );
       }
     }
   };

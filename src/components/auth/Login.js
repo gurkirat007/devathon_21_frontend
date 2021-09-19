@@ -21,6 +21,10 @@ class Login extends Component {
     fetch("http://localhost:8000/login", {
       body: userData,
       method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        // "Access-Control-Allow-Headers": "Content-Type, Authorization",
+      },
     })
       .then((response) => {
         return response.json();
